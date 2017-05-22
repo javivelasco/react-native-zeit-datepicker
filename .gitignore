@@ -1,0 +1,9 @@
+node_modules/
+.expo/
+npm-debug.*
+lib
+build
+.idea
+.DS_Store
+*.iml
+.yarnclean
