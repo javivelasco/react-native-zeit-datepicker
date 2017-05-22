@@ -15,7 +15,7 @@
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
     "test": "node node_modules/jest/bin/jest.js --watch",
-    "prettier": "prettier --single-quote --trailing-comma es5 --write \"**/*.js\""
+    "prettier": "prettier --single-quote --trailing-comma es5 --write \"src/**/*.js\""
   },
   "jest": {
     "preset": "jest-expo"
