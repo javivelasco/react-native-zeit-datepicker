@@ -15,6 +15,6 @@ const DatePicker = datePickerFactory({
 
 function Empty() {
   return null;
-};
+}
 
 export default DatePicker;

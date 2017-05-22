@@ -1,7 +1,7 @@
 import React from 'react';
-import { TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
-import TouchableRipple from '../TouchableRipple'
+import { TouchableWithoutFeedback } from 'react-native';
+import TouchableRipple from '../TouchableRipple';
 
 const RawButton = ({ children, label, onPress, ...rest }) => (
   <ButtonRipple onPress={onPress} rippleColor="#50E3C2">
@@ -22,7 +22,7 @@ const ButtonNode = styled.View`
   border-radius: 3;
   justify-content: center;
   padding: 0 10;
-`
+`;
 
 const ButtonText = styled.Text`
   color: #50E3C2;

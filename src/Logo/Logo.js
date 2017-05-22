@@ -2,11 +2,11 @@ import React from 'react';
 import { Image } from 'react-native';
 
 const Logo = ({ width }) => (
-  <Image 
+  <Image
     source={require('./logo.png')}
-    style={{ height: (width * 300/340), width }}
+    style={{ height: width * 300 / 340, width }}
   />
-)
+);
 
 Logo.defaultProps = {
   width: 100,

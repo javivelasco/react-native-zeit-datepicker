@@ -3,13 +3,29 @@ import { View } from 'react-native';
 import { isSameDay } from 'date-fns';
 import { dayFactory } from 'react-toolbox-core';
 import styled, { css } from 'styled-components/native';
+import PropTypes from 'prop-types';
 
 class DayNode extends Component {
-  state = { 
+  static propTypes = {
+    day: PropTypes.instanceOf(Date),
+    disabled: PropTypes.bool,
+    inRange: PropTypes.bool,
+    onPress: PropTypes.func,
+    outOfMonth: PropTypes.bool,
+    selected: PropTypes.bool,
+    selectedSource: PropTypes.oneOf(['from', 'to', null]),
+    selection: PropTypes.shape({
+      from: PropTypes.instanceOf(Date),
+      to: PropTypes.instanceOf(Date),
+    }),
+    today: PropTypes.bool,
+  };
+
+  state = {
     pressed: false,
   };
 
-  handlePress = (event) => {
+  handlePress = event => {
     this.props.onPress(this.props.day, event);
   };
 
@@ -25,27 +41,41 @@ class DayNode extends Component {
     const { pressed } = this.state;
     const { children, onPress: _onPress, monthWidth, ...rest } = this.props;
     const dayWidthNoRound = Math.floor(monthWidth / 7);
-    const dayWidth = dayWidthNoRound % 2 === 0 ? dayWidthNoRound : dayWidthNoRound - 1;
-    const { selection: { from, to } } = this.props;
-    const selectedSameDayRange = from && to && isSameDay(from, to);
+    const dayWidth = dayWidthNoRound % 2 === 0
+      ? dayWidthNoRound
+      : dayWidthNoRound - 1;
+    const selectedSameDayRange =
+      this.props.selection.from &&
+      this.props.selection.to &&
+      isSameDay(this.props.from, this.props.to);
 
     return (
-      <DayWrapper selectedSameDayRange={selectedSameDayRange} width={dayWidth} {...rest}>
-        <DayNodeWrapper selectedSameDayRange={selectedSameDayRange} width={dayWidth} {...rest}>
-          {!rest.outOfMonth && (
+      <DayWrapper
+        selectedSameDayRange={selectedSameDayRange}
+        width={dayWidth}
+        {...rest}
+      >
+        <DayNodeWrapper
+          selectedSameDayRange={selectedSameDayRange}
+          width={dayWidth}
+          {...rest}
+        >
+          {!rest.outOfMonth &&
             <TouchableDayNode
               onHideUnderlay={this.handleHideUnderlay}
               onPress={!rest.disabled ? this.handlePress : null}
               onShowUnderlay={this.handleShowUnderlay}
               underlayColor="#FFF"
             >
-              <View aspectRatio={1} style={{ alignItems: 'center', justifyContent: 'center' }}>  
+              <View
+                aspectRatio={1}
+                style={{ alignItems: 'center', justifyContent: 'center' }}
+              >
                 <DayNodeText pressed={pressed} {...rest}>
                   {children}
                 </DayNodeText>
               </View>
-            </TouchableDayNode>
-          )}
+            </TouchableDayNode>}
         </DayNodeWrapper>
       </DayWrapper>
     );
@@ -61,9 +91,7 @@ const DayWrapper = styled.View`
 
 function getDayWrapperAlignItems(props) {
   if (props.selected && props.inRange && !props.selectedSameDayRange) {
-    return props.selectedSource === 'from'
-      ? 'flex-end'
-      : 'flex-start';
+    return props.selectedSource === 'from' ? 'flex-end' : 'flex-start';
   }
   return 'center';
 }
@@ -114,7 +142,7 @@ function getSelectedStyles(props) {
           border-top-left-radius: 22;
           border-top-right-radius: 0;
           padding-right: ${(props.width - 44) / 2};
-          width: ${44 + ((props.width - 44) / 2)};
+          width: ${44 + (props.width - 44) / 2};
         `;
       } else {
         return css`
@@ -124,7 +152,7 @@ function getSelectedStyles(props) {
           border-top-left-radius: 0;
           border-top-right-radius: 22;
           padding-left: ${(props.width - 44) / 2};
-          width: ${44 + ((props.width - 44) / 2)};
+          width: ${44 + (props.width - 44) / 2};
         `;
       }
     }

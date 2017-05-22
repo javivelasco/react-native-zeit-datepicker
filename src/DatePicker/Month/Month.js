@@ -3,9 +3,16 @@ import { addMonths } from 'date-fns';
 import { FlatList } from 'react-native';
 import { monthFactory } from 'react-toolbox-core';
 import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
 import Day from './Day';
 
+let cachedWidth = 0;
+
 export default class MonthsList extends Component {
+  static propTypes = {
+    viewDate: PropTypes.instanceOf(Date),
+  };
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.viewDate.getTime() !== this.props.viewDate.getTime()) {
       this.setState({ data: getData(nextProps.viewDate) });
@@ -17,20 +24,17 @@ export default class MonthsList extends Component {
     width: 0,
   };
 
-  keyExtractor = (item, index) => (
-    item.getTime().toString()
-  );
+  keyExtractor = (item, index) => item.getTime().toString();
 
-  handleLayoutReady = (event) => {
-    this.setState({
-      width: event.nativeEvent.layout.width,
-    });
+  handleLayoutReady = event => {
+    cachedWidth = event.nativeEvent.layout.width;
+    this.setState({ width: cachedWidth });
   };
 
   renderMonth = ({ item }) => {
     const { highlighted, onDayClick, selected, ...rest } = this.props;
     const { width } = this.state;
-    
+
     return (
       <Month
         {...rest}
@@ -38,7 +42,7 @@ export default class MonthsList extends Component {
         onDayClick={onDayClick}
         selected={selected}
         viewDate={item}
-        width={width}
+        width={cachedWidth}
       />
     );
   };
@@ -47,17 +51,18 @@ export default class MonthsList extends Component {
     const { data, width } = this.state;
     return (
       <ListWrapper onLayout={this.handleLayoutReady}>
-        {width !== 0 && <FlatList
-          data={data}
-          initialNumToRender={4}
-          keyExtractor={this.keyExtractor}
-          maxToRenderPerBatch={6}
-          onViewableItemsChanged={this.viewableChanged}
-          renderItem={this.renderMonth}
-          showsVerticalScrollIndicator={false}
-          style={{ flex: 1 }}
-          windowSize={4}
-        />}
+        {(width || cachedWidth) !== 0 &&
+          <FlatList
+            data={data}
+            initialNumToRender={4}
+            keyExtractor={this.keyExtractor}
+            maxToRenderPerBatch={6}
+            onViewableItemsChanged={this.viewableChanged}
+            renderItem={this.renderMonth}
+            showsVerticalScrollIndicator={false}
+            style={{ flex: 1 }}
+            windowSize={4}
+          />}
       </ListWrapper>
     );
   }
@@ -75,9 +80,9 @@ const Month = monthFactory({
         return {
           monthWidth: props.width,
           onPress: function handleOnDayPress(...args) {
-            props.onDayClick(...args)
-          }  
-        }
+            props.onDayClick(...args);
+          },
+        };
       default:
         return {};
     }

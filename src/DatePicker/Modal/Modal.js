@@ -2,12 +2,24 @@ import React, { Component } from 'react';
 import { Modal } from 'react-native';
 import { isBefore, isToday } from 'date-fns';
 import styled from 'styled-components/native';
+import PropTypes from 'prop-types';
 import IconClose from './IconClose';
 import DoneButton from './DoneButton';
 import DatePicker from '../DatePicker';
 import Logo from '../../Logo';
 
 export default class PickerModal extends Component {
+  static propTypes = {
+    active: PropTypes.bool,
+    onChange: PropTypes.func,
+    onClose: PropTypes.func,
+    value: PropTypes.shape({
+      from: PropTypes.instanceOf(Date),
+      to: PropTypes.instanceOf(Date),
+    }),
+  };
+
+  today = new Date();
   state = getInitialState(this.props);
 
   componentWillReceiveProps(nextProps) {
@@ -16,30 +28,39 @@ export default class PickerModal extends Component {
     }
   }
 
-  handleChange = (value) => {
+  handleChange = value => {
     this.setState({ value });
   };
 
-  isDayDisabled = (date) => (
-    isBefore(date, Date.now()) && !isToday(date)
-  );
+  handleDonePress = () => {
+    if (this.isValid()) {
+      this.props.onChange(this.state.value);
+    }
+  };
 
-  handleFocusedInputChange = (focusedInput) => {
+  isValid = () => !!this.state.value.from && !!this.state.value.to;
+
+  isDayDisabled = date => isBefore(date, Date.now()) && !isToday(date);
+
+  handleFocusedInputChange = focusedInput => {
     this.setState({ focusedInput });
   };
 
   render() {
+    const { active, onClose } = this.props;
+    const { value } = this.state;
+
     return (
-      <Modal animationType="slide" transparent={false} visible={this.props.active}>
+      <Modal animationType="slide" transparent={false} visible={active}>
         <ModalWrapper>
           <HeaderWrapper>
-            <IconClose onPress={this.props.onClose} />
+            <IconClose onPress={onClose} />
             <LogoWrapper>
               <Logo width={34} />
             </LogoWrapper>
             <DoneButton
-              isValid={this.state.value.from && this.state.value.to}
-              onPress={this.props.onClose}
+              isValid={this.isValid()}
+              onPress={this.handleDonePress}
             />
           </HeaderWrapper>
           <DatePicker
@@ -49,8 +70,8 @@ export default class PickerModal extends Component {
             onChange={this.handleChange}
             onFocusedInputChange={this.handleFocusedInputChange}
             resetToWhenFromChanges
-            selected={this.state.value}
-            viewDate={new Date()}
+            selected={value}
+            viewDate={this.today}
           />
         </ModalWrapper>
       </Modal>

@@ -19,4 +19,4 @@ Touchable.propTypes = {
   style: PropTypes.array,
 };
 
-export default withRipple()(Touchable)
+export default withRipple()(Touchable);

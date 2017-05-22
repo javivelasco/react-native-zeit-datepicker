@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import DateView from './DateView';
 
@@ -12,6 +13,11 @@ const Heading = ({ from, to }) => (
     </DateView>
   </HeadingLayout>
 );
+
+Heading.propTypes = {
+  from: PropTypes.instanceOf(Date),
+  to: PropTypes.instanceOf(Date),
+};
 
 const HeadingLayout = styled.View`
   align-items: center;

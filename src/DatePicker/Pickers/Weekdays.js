@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
 import { getFullDayOfWeek } from 'react-toolbox-core';
+import PropTypes from 'prop-types';
 import Weekday from './Weekday';
 
 class Weekdays extends Component {
+  static propTypes = {
+    locale: PropTypes.string,
+    sundayFirstDayOfWeek: PropTypes.bool,
+  };
+
   renderDay = weekDay => {
     const { locale } = this.props;
     const fullDay = getFullDayOfWeek(weekDay, locale);
@@ -20,7 +26,7 @@ class Weekdays extends Component {
     return (
       <WeekdaysWrapper>
         {daysIdxs.map(this.renderDay)}
-      </WeekdaysWrapper>    
+      </WeekdaysWrapper>
     );
   }
 }
@@ -36,9 +42,7 @@ const WeekdaysWrapper = styled.View`
 
 function getSortedDaysIdx(sundayFirstDayOfWeek) {
   const indexes = [0, 1, 2, 3, 4, 5, 6];
-  return sundayFirstDayOfWeek
-    ? [...indexes.slice(1), indexes[0]]
-    : indexes;
+  return sundayFirstDayOfWeek ? [...indexes.slice(1), indexes[0]] : indexes;
 }
 
 export default Weekdays;
