@@ -60,6 +60,8 @@ const AppWrapper = styled.View`
 
 const MainText = styled.Text`
   color: #fff;
+  font-size: 14;
+  line-height: 24;
   margin-bottom: 20;
   margin-top: 20;
   max-width: 280;
