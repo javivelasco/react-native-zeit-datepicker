@@ -1,5 +1,10 @@
 {
   "expo": {
-    "sdkVersion": "16.0.0"
+    "name": "Zeit Native DatePicker (React Toolbox Core)",
+    "description": "A demo showing an implementation of Zeit DatePicker using React Toolbox Core DatePicker agnostic component",
+    "slug": "zeit-native-datepicker",
+    "sdkVersion": "16.0.0",
+    "privacy": "unlisted",
+    "orientation": "portrait"
   }
 }
