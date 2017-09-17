@@ -41,9 +41,8 @@ class DayNode extends Component {
     const { pressed } = this.state;
     const { children, onPress: _onPress, monthWidth, ...rest } = this.props;
     const dayWidthNoRound = Math.floor(monthWidth / 7);
-    const dayWidth = dayWidthNoRound % 2 === 0
-      ? dayWidthNoRound
-      : dayWidthNoRound - 1;
+    const dayWidth =
+      dayWidthNoRound % 2 === 0 ? dayWidthNoRound : dayWidthNoRound - 1;
     const selectedSameDayRange =
       this.props.selection.from &&
       this.props.selection.to &&
@@ -60,7 +59,7 @@ class DayNode extends Component {
           width={dayWidth}
           {...rest}
         >
-          {!rest.outOfMonth &&
+          {!rest.outOfMonth && (
             <TouchableDayNode
               onHideUnderlay={this.handleHideUnderlay}
               onPress={!rest.disabled ? this.handlePress : null}
@@ -75,7 +74,8 @@ class DayNode extends Component {
                   {children}
                 </DayNodeText>
               </View>
-            </TouchableDayNode>}
+            </TouchableDayNode>
+          )}
         </DayNodeWrapper>
       </DayWrapper>
     );
@@ -101,9 +101,9 @@ const DayNodeWrapper = styled.View`
   flex: 1;
   justify-content: center;
   width: 44;
-  ${getTodayStyles}
-  ${getInRangeStyles}
-  ${getSelectedStyles}
+  ${getTodayStyles};
+  ${getInRangeStyles};
+  ${getSelectedStyles};
 `;
 
 function getTodayStyles(props) {
@@ -137,7 +137,7 @@ function getSelectedStyles(props) {
       if (props.selectedSource === 'from') {
         return css`
           background-color: #fff;
-          border-bottom-left-radius: 22; 
+          border-bottom-left-radius: 22;
           border-bottom-right-radius: 0;
           border-top-left-radius: 22;
           border-top-right-radius: 0;
@@ -147,7 +147,7 @@ function getSelectedStyles(props) {
       } else {
         return css`
           background-color: #fff;
-          border-bottom-left-radius: 0; 
+          border-bottom-left-radius: 0;
           border-bottom-right-radius: 22;
           border-top-left-radius: 0;
           border-top-right-radius: 22;

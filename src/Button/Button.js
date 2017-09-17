@@ -21,11 +21,12 @@ const ButtonNode = styled.View`
   align-items: center;
   border-radius: 3;
   justify-content: center;
-  padding: 0 10;
+  padding-left: 10;
+  padding-right: 10;
 `;
 
 const ButtonText = styled.Text`
-  color: #50E3C2;
+  color: #50e3c2;
   font-size: 14;
   line-height: 28;
 `;

@@ -31,8 +31,8 @@ class App extends React.Component {
         <StatusBar barStyle="light-content" />
         <Logo width={60} />
         <MainText>
-          This is a demo of a working DatePicker for zeit.co
-          using the upcoming react-toolbox-core agnostic components
+          This is a demo of a working DatePicker for zeit.co using the upcoming
+          react-toolbox-core agnostic components
         </MainText>
         <SelectedValues>
           <SelectedValue>{parsedDate(from)}</SelectedValue>
@@ -73,8 +73,6 @@ const SelectedValues = styled.View`
   margin-bottom: 20;
 `;
 
-const SelectedValue = styled.Text`
-  color: #979797;
-`;
+const SelectedValue = styled.Text`color: #979797;`;
 
 export default App;

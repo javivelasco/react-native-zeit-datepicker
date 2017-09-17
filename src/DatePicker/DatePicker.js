@@ -5,9 +5,7 @@ import Month from './Month';
 
 const DatePicker = datePickerFactory({
   NextNode: Empty,
-  PickerWrapper: styled.View`
-    flex: 1;
-  `,
+  PickerWrapper: styled.View`flex: 1;`,
   PrevNode: Empty,
   RangePicker,
   Month,

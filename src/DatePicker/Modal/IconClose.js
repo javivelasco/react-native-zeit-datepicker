@@ -16,9 +16,7 @@ IconClose.propTypes = {
   onPress: PropTypes.func,
 };
 
-const Wrapper = styled.View`
-  min-width: 80;
-`;
+const Wrapper = styled.View`min-width: 80;`;
 
 const IconRipple = styled(TouchableRipple)`
   border-radius: 13;

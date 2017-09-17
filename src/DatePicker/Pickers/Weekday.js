@@ -2,9 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 const Weekday = ({ children, ...rest }) => (
-  <WeekdayNode {...rest}>
-    {children.charAt(0)}
-  </WeekdayNode>
+  <WeekdayNode {...rest}>{children.charAt(0)}</WeekdayNode>
 );
 
 const WeekdayNode = styled.Text`

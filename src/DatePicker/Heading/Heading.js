@@ -8,9 +8,7 @@ const Heading = ({ from, to }) => (
     <DateView start date={from}>
       START DATE
     </DateView>
-    <DateView date={to}>
-      END DATE
-    </DateView>
+    <DateView date={to}>END DATE</DateView>
   </HeadingLayout>
 );
 
@@ -22,7 +20,10 @@ Heading.propTypes = {
 const HeadingLayout = styled.View`
   align-items: center;
   flex-direction: row;
-  padding: 15;
+  padding-bottom: 15;
+  padding-left: 15;
+  padding-right: 15;
+  padding-top: 15;
 `;
 
 export default Heading;

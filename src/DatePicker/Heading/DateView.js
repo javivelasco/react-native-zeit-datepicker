@@ -22,13 +22,13 @@ const Wrapper = styled.View`
 `;
 
 const Title = styled.Text`
-  color: #FFF;
+  color: #fff;
   font-size: 12;
   text-align: ${props => (props.start ? 'left' : 'right')};
 `;
 
 const DateNode = styled.Text`
-  color: #FFF;
+  color: #fff;
   flex-grow: 1;
   font-size: 18;
   font-weight: 300;

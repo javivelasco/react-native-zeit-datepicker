@@ -20,9 +20,7 @@ DoneButton.propTypes = {
   onPress: PropTypes.func,
 };
 
-const Wrapper = styled.View`
-  min-width: 80;
-`;
+const Wrapper = styled.View`min-width: 80;`;
 
 const DoneButtonRipple = styled(TouchableRipple)`
   align-self: flex-end;
@@ -33,7 +31,10 @@ const DoneButtonRipple = styled(TouchableRipple)`
 const Text = styled.Text`
   color: ${getButtonColor};
   font-size: 16;
-  padding: 4;
+  padding-bottom: 4;
+  padding-left: 4;
+  padding-right: 4;
+  padding-top: 4;
 `;
 
 function getButtonColor(props) {

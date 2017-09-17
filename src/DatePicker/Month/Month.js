@@ -51,7 +51,7 @@ export default class MonthsList extends Component {
     const { data, width } = this.state;
     return (
       <ListWrapper onLayout={this.handleLayoutReady}>
-        {(width || cachedWidth) !== 0 &&
+        {(width || cachedWidth) !== 0 && (
           <FlatList
             data={data}
             initialNumToRender={4}
@@ -62,7 +62,8 @@ export default class MonthsList extends Component {
             showsVerticalScrollIndicator={false}
             style={{ flex: 1 }}
             windowSize={4}
-          />}
+          />
+        )}
       </ListWrapper>
     );
   }
@@ -103,14 +104,13 @@ const Month = monthFactory({
     line-height: 50;
     margin-left: 15;
   `,
-  DaysWrapper: styled.View`
-    flex-direction: column;
-  `,
+  DaysWrapper: styled.View`flex-direction: column;`,
   DaysWeek: styled.View`
     align-items: center;
     flex-direction: row;
     flex-grow: 1;
-    margin: 3 0;
+    margin-bottom: 3;
+    margin-top: 3;
   `,
   Day,
 });

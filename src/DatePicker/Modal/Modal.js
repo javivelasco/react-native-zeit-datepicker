@@ -94,7 +94,10 @@ const HeaderWrapper = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 15;
+  padding-bottom: 15;
+  padding-left: 15;
+  padding-right: 15;
+  padding-top: 15;
 `;
 
 const LogoWrapper = styled.View`

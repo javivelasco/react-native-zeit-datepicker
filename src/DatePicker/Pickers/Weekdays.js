@@ -23,11 +23,7 @@ class Weekdays extends Component {
   render() {
     const { sundayFirstDayOfWeek } = this.props;
     const daysIdxs = getSortedDaysIdx(sundayFirstDayOfWeek);
-    return (
-      <WeekdaysWrapper>
-        {daysIdxs.map(this.renderDay)}
-      </WeekdaysWrapper>
-    );
+    return <WeekdaysWrapper>{daysIdxs.map(this.renderDay)}</WeekdaysWrapper>;
   }
 }
 
@@ -37,7 +33,10 @@ const WeekdaysWrapper = styled.View`
   border-bottom-width: 1;
   flex-direction: row;
   justify-content: center;
-  padding: 5;
+  padding-bottom: 5;
+  padding-left: 5;
+  padding-right: 5;
+  padding-top: 5;
 `;
 
 function getSortedDaysIdx(sundayFirstDayOfWeek) {
